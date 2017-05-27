@@ -6,7 +6,7 @@ The next phase will be cloning this project to your machine. Change directory in
 ### Sample
 The sample code in this project uses Digital Ocean as its based provider. All you need to do is to change the token to a valid DOs API you are well on your way to *Terraforming*
 
-After changing the API token, run `terraform apply` then sit back and watch Terraform do its thing.
+After changing the API token, change directory to files location using `cd /vagrant` and run `terraform apply` then sit back and watch Terraform do its thing.
 
 ### Done?
 When you're done experimenting, simply run `terraform destroy` and terraform will destroy all previously created resource. 
