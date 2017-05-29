@@ -3,6 +3,7 @@ This project is Vagrant dependent. If you don't have Vagrant installed on your m
 
 The next phase will be cloning this project to your machine. Change directory into the `terraform` directory and run `vagrant up && vagrant ssh` this will launch you into a vagrant box with Terraform provisioned. 
 
+I have also written a simple [Introduction to Terraform tutorial](http://cyberomin.github.io/engineering/2017/05/29/terraform-introduction.html) here that can help you follow along.
 ### Generating SSH Keys
 To generate an SSH key, simply run this command on your terminal `ssh-keygen -t rsa -b 4096 -C “your email”` and follow the on-screen information. I’ll strongly advise that you don’t set a passphrase for your SSH key. 
 
