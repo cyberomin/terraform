@@ -7,41 +7,41 @@ provider "digitalocean" {
 }
 
 resource "digitalocean_ssh_key" "default" {
-  name = "SSH Key Credential"
+  name       = "SSH Key Credential"
   public_key = "${file("/home/vagrant/.ssh/id_rsa.pub")}"
 }
 
 resource "digitalocean_droplet" "web" {
-  image = "ubuntu-16-04-x64"
-  name = "web-1"
-  count = 2
-  region = "lon1"
-  size = "1gb"
+  count    = 2
+  image    = "ubuntu-16-04-x64"
+  name     = "web-${count.index}"
+  region   = "lon1"
+  size     = "1gb"
   ssh_keys = ["${digitalocean_ssh_key.default.id}"]
 }
 
 resource "digitalocean_droplet" "database" {
-  image = "ubuntu-16-04-x64"
-  name = "web-1"
-  region = "lon1"
-  size = "1gb"
+  image    = "ubuntu-16-04-x64"
+  name     = "db-1"
+  region   = "lon1"
+  size     = "1gb"
   ssh_keys = ["${digitalocean_ssh_key.default.id}"]
 }
 
 resource "digitalocean_loadbalancer" "public_lb" {
-  name = "web-lb"
+  name   = "public-lb"
   region = "lon1"
 
   forwarding_rule {
-    entry_port = 80
+    entry_port     = 80
     entry_protocol = "http"
 
-    target_port = 80
+    target_port     = 80
     target_protocol = "http"
   }
-    
-  algorithm = "round_robin"
-  droplet_ids = ["${digitalocean_droplet.web.id}"]
+
+  algorithm   = "round_robin"
+  droplet_ids = ["${digitalocean_droplet.web.*.id}"]
 }
 
 output "loadbalancer_ip" {
